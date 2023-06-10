@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+change Profile pic
+{% endblock title %}
+
+{% block body_block %}
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Change">
+</form>
+{% endblock body_block %}

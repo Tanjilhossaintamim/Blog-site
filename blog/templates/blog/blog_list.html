@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% block title %}
+Blog list
+{% endblock title %}
+
+
+
+
+{% block body_block %}
+
+{% for blog in blogs %}
+<h3>{{ blog.blog_title }}</h3>
+<h6>{{blog.publish_at}}</h6>
+
+<div class="row p-3">
+    <div class="col-7">
+
+        <img src="/media/{{blog.blog_image}}" title="{{blog.blog_title}}" width="100%">
+    </div>
+    <div class="col-5">
+        <p>{{blog.blog_content|range_filter|linebreaks}}<a href="{% url 'blog:details' id=blog.pk %}">Read More</a></p>
+
+        <h6>Posted by :<a href="{% url 'blog:author_details' pk=blog.author.pk%}">{{blog.author}}</a></h6>
+
+
+    </div>
+</div>
+<hr>
+
+
+{% endfor %}
+
+{% endblock body_block %}

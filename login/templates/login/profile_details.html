@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Profile Details
+{% endblock title %}
+
+
+{% block body_block %}
+
+{% if author.first_name %}
+
+<h2>{{author.first_name}} {{author.last_name}}</h2>
+{% else %}
+<h1>{{author.username}}</h1>
+
+{% endif %}
+
+
+{% if author.user_all_profile %}
+<img src="/media/{{author.user_all_profile.profile_pic}}" alt="" width="300" class="mt-5">
+{% else %}
+<img src="/media/profile_pic/default.avif" alt="" width="300" class="mt-5">
+
+{% endif %}
+
+
+{% endblock body_block %}

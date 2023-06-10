@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Write Blog
+{% endblock title %}
+
+
+{% block body_block %}
+<form enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Create">
+</form>
+
+
+{% endblock body_block %}

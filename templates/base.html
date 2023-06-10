@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+
+        {% block title %}
+        blog
+        {% endblock title %}
+
+    </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/6da7043c56.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-secondary">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav fs-4">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'blog:blog_list' %}">Home</a>
+                    </li>
+
+
+                    {% if user.is_authenticated %}
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'blog:write_blog' %}">Write Blog</a>
+                    </li>
+
+
+
+                    <li class="nav-item dropdown">
+                        {% if user.user_all_profile %}
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img src="/media/{{user.user_all_profile.profile_pic}}" alt="" width="40" height="40"
+                                class="rounded-circle">
+                        </a>
+                        {% else %}
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img src="/media/profile_pic/default.avif" alt="" width="40" height="40"
+                                class="rounded-circle">
+                        </a>
+                        {% endif %}
+
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'login:profile' %}">Profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'blog:myblog' %}">My Blog</a></li>
+                            <li><a class="dropdown-item" href="{% url 'login:logout' %}">Logout</a></li>
+                        </ul>
+                    </li>
+
+
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login:signup' %}">SignUp</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login:login' %}">Login</a>
+
+                    </li>
+                    {% endif %}
+
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        {% block body_block %}
+
+
+        {% endblock body_block %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
